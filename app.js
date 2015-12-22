@@ -8,7 +8,21 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var yaml = require('js-yaml');
+var fs = require('fs');
+
+var server = yaml.safeLoad(fs.readFileSync('./config.yml', 'utf8'));
+var env = process.env.NODE_ENV;
+
 var app = express();
+
+// set environment
+console.log(env);
+
+var serve = {
+  port: server[env].port,
+  key: server[env].shortkey
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+app.listen(serve.port);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

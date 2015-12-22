@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Grand Openings  
-  form(method="POST", action="/testpost")
+  form(method="POST", action="/")
     div.formGroup
       h2 Store Details
       div.one-half
@@ -33,32 +33,32 @@ block content
       div.previewDate(ng-repeat="prevDate in prevDates", name="previewDates")
         label Grand Opening Preview Day & Time
         div.dateGroup
-          select#goPrevDate1(name="goPrevDate1")
+          select.goPrevDate(name="goPrevDate")
             option(ng-repeat="weekday in weekdays") {{weekday.day}}
 
-          select#goPrevTime1_startHour(name="goPrevTime1_startHour")
+          select.goPrevTime_startHour(name="goPrevTime_startHour")
             option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
           span :
-          select#goPrevTime1_startMinute(name="goPrevTime1_startMinute")
+          select.goPrevTime_startMinute(name="goPrevTime_startMinute")
             option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
 
-          select#goPrevTime1_startAmPm(name="goPrevTime1_startAmPm")
+          select.goPrevTime_startAmPm(name="goPrevTime_startAmPm")
             option(value="AM") AM
             option(value="PM") PM
           span  -
           //End Time
-          select#goPrevTime1_endHour(name="goPrevTime1_endHour")
+          select.goPrevTime_endHour(name="goPrevTime_endHour")
             option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
           span :
-          select#goPrevTime1_endMinute(name="goPrevTime1_endMinute")
+          select.goPrevTime_endMinute(name="goPrevTime_endMinute")
             option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
 
-          select#goPrevTime1_endAmPm(name="goPrevTime1_endAmPm")
+          select.goPrevTime_endAmPm(name="goPrevTime_endAmPm")
             option(value="AM") AM
             option(value="PM") PM    
 
       div.addPreviewDate
-        button(ng-click="duplicatePrevEvent()") Add Preview Date +
+        button(type="button",ng-click="duplicatePrevEvent()") Add Preview Date +
         
       //GO Event Days & Times
       div.eventDate
@@ -91,7 +91,7 @@ block content
             option(value="PM") PM
       
       div.addGoEventDate
-        button Add Grand Opening Event Date +
+        button(type="button") Add Grand Opening Event Date +
 
       //Coupon Info (There are 2 fields in the spreadsheet, but they are the same)
       div
@@ -147,10 +147,10 @@ block content
       div
           label Appearance Description
           //Convert to all uppercase
-          textarea#appearanceDesc1(rows=5, name="#appearanceDesc1")
+          textarea#appearanceDesc1(rows=5, name="appearanceDesc1")
           
       div.addAppearance
-        button Add Appearance +
+        button(type="button") Add Appearance +
           
     //Addtl Gift Locker Giveaways      
     div.formGroup
@@ -173,7 +173,7 @@ block content
           input#giveawayD1Savings1(type=text, name="giveawayD1Savings1")
           
         div.addGiveaway1
-          button Add Giveaway +
+          button(type="button") Add Giveaway +
         
       //Day 2  
       div.one-third
@@ -192,7 +192,7 @@ block content
           input#giveawayD2Savings1(type=text, name="giveawayD2Savings1")
           
         div.addGiveaway2
-          button Add Giveaway +
+          button(type="button") Add Giveaway +
           
       //Day 3 
       div.one-third
@@ -211,7 +211,7 @@ block content
           input#giveawayD3Savings1(type=text, name="giveawayD3Savings1")
           
         div.addGiveaway3
-          button Add Giveaway +
+          button(type="button") Add Giveaway +
           
     //Enter for a Chance to Win      
     div.formGroup
@@ -229,7 +229,7 @@ block content
           input#winC1Savings1(type=text, name="winC1Savings1")
           
         div.addWin1
-          button Add Win +
+          button(type="button") Add Win +
          
       div.one-third
         div.winGroup
@@ -243,7 +243,7 @@ block content
           input#winC2Savings1(type=text, name="winC2Savings1")
           
         div.addWin2
-          button Add Win +
+          button(type="button") Add Win +
           
       div.one-third
         div.winGroup
@@ -257,7 +257,7 @@ block content
           input#winC3Savings1(type=text, name="winC3Savings1")
           
         div.addWin3
-          button Add Win +
+          button(type="button") Add Win +
       
     //Social Image
     div.formGroup
@@ -274,5 +274,4 @@ block content
         textarea#disclaimer(rows=5, name="disclaimer")
       
           
-      input(type="hidden", value="{{count}}")      
-    button(type="submit") Export
+    input(type='submit')
