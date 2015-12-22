@@ -1,5 +1,278 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Grand Openings  
+  form(method="POST", action="/testpost")
+    div.formGroup
+      h2 Store Details
+      div.one-half
+        label Client Key
+        input#storeNum(type=text, name="storeNum")
+
+      div.one-half
+        label Store Name
+        input#storeName(type=text, name="storeName")
+
+      div.one-quarter
+        label Opening Soon
+        input#openingSoon(type=text, name="openingSoon")
+
+      div.one-quarter
+        label New Store
+        input#newStore(type=text, name="newStore")
+
+      div.one-quarter
+        label Grand Opening
+        input#go(type=text, name="go")
+        
+      div.one-quarter
+        label Grand Opening Date
+        input#goDate.datepicker(type=text, name='goDate')
+
+      // Preview Day & Times
+      div.previewDate(ng-repeat="prevDate in prevDates", name="previewDates")
+        label Grand Opening Preview Day & Time
+        div.dateGroup
+          select#goPrevDate1(name="goPrevDate1")
+            option(ng-repeat="weekday in weekdays") {{weekday.day}}
+
+          select#goPrevTime1_startHour(name="goPrevTime1_startHour")
+            option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
+          span :
+          select#goPrevTime1_startMinute(name="goPrevTime1_startMinute")
+            option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
+
+          select#goPrevTime1_startAmPm(name="goPrevTime1_startAmPm")
+            option(value="AM") AM
+            option(value="PM") PM
+          span  -
+          //End Time
+          select#goPrevTime1_endHour(name="goPrevTime1_endHour")
+            option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
+          span :
+          select#goPrevTime1_endMinute(name="goPrevTime1_endMinute")
+            option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
+
+          select#goPrevTime1_endAmPm(name="goPrevTime1_endAmPm")
+            option(value="AM") AM
+            option(value="PM") PM    
+
+      div.addPreviewDate
+        button(ng-click="duplicatePrevEvent()") Add Preview Date +
+        
+      //GO Event Days & Times
+      div.eventDate
+        label Grand Opening Event Day & Time
+        div.dateGroup
+          select#goEventDate1(name="goEventDate1")
+            option(ng-repeat="weekday in weekdays") {{weekday.day}}
+
+          select#goEventTime1_startHour(name="goEventTime1_startHour")
+            option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
+          span :
+          select#goEventTime1_startMinute(name="goEventTime1_startMinute")
+            option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
+
+          select#goEventTime1_startAmPm(name="goEventTime1_startAmPm")
+            option(value="AM") AM
+            option(value="PM") PM
+          
+          span  - 
+            
+          //End Time  
+          select#goEventTime1_endHour(name="goEventTime1_endHour")
+            option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
+          span :
+          select#goEventTime1_endMinute(name="goEventTime1_endMinute")
+            option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
+
+          select#goEventTime1_endAmPm(name="goEventTime1_endAmPm")
+            option(value="AM") AM
+            option(value="PM") PM
+      
+      div.addGoEventDate
+        button Add Grand Opening Event Date +
+
+      //Coupon Info (There are 2 fields in the spreadsheet, but they are the same)
+      div
+        label Coupon URL
+        input#couponImg(type=text, name="couponImg")
+    
+    //Appearance Info -- will add more of these sections dynamically
+    div.formGroup
+      h2 Special Appearances
+      
+      div
+        label Appearance Image
+        input#appearanceImg1(type=text, name="appearanceImg1")
+        
+      div.one-third
+        label Appearance Date
+        input#appearanceDate1.datepicker(type=text, name="appearanceDate1")
+        
+      div.one-third
+        label Appearance Name
+        input#appearanceName1(type=text, name="appearanceName1")
+        
+      div.one-third
+        label Appearance Title
+        input#appearanceTitle1(type=text, name="appearanceTitle1")
+        
+      div
+        label Appearance Time 1
+        div.dateGroup
+          select#appearTime1_startHour(name="appearTime1_startHour")
+            option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
+          span :
+          select#appearTime1_startMinute(name="appearTime1_startMinute")
+            option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
+
+          select#appearTime1_startAmPm(name="appearTime1_startAmPm")
+            option(value="AM") AM
+            option(value="PM") PM
+          
+          span  - 
+            
+          //End Time  
+          select#appearTime1_endHour(name="appearTime1_endHour")
+            option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
+          span :
+          select#appearTime1_endMinute(name="appearTime1_endMinute")
+            option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
+
+          select#appearTime1_endAmPm(name="appearTime1_endAmPm")
+            option(value="AM") AM
+            option(value="PM") PM
+
+      div
+          label Appearance Description
+          //Convert to all uppercase
+          textarea#appearanceDesc1(rows=5, name="#appearanceDesc1")
+          
+      div.addAppearance
+        button Add Appearance +
+          
+    //Addtl Gift Locker Giveaways      
+    div.formGroup
+      h2 Additional Gift Locker Giveaways
+      
+      //Day 1
+      div.one-third
+        label 
+          strong Giveaway Date 1
+        input#giveawayDate1.datepicker(type=text, name="giveawayDate1")
+        
+        div.giveawayGroup
+          label Giveaway Time & Title
+          input#giveawayD1Title1.datepicker(type=text, name="giveawayD1T1")
+          
+          label Giveaway Desc.
+          input#giveawayD1Desc1(type=text, name="giveawayD1Dec1")
+          
+          label Giveaway Savings
+          input#giveawayD1Savings1(type=text, name="giveawayD1Savings1")
+          
+        div.addGiveaway1
+          button Add Giveaway +
+        
+      //Day 2  
+      div.one-third
+        label 
+        strong Giveaway Date 2
+        input#giveawayDate2.datepicker(type=text, name="giveawayDate2")
+        
+        div.giveawayGroup
+          label Giveaway Time & Title
+          input#giveawayD2Title1.datepicker(type=text, name="giveawayD2T1")
+          
+          label Giveaway Desc.
+          input#giveawayD2Desc1(type=text, name="giveawayD2Desc1")
+          
+          label Giveaway Savings
+          input#giveawayD2Savings1(type=text, name="giveawayD2Savings1")
+          
+        div.addGiveaway2
+          button Add Giveaway +
+          
+      //Day 3 
+      div.one-third
+        label 
+        strong Giveaway Date 3
+        input#giveawayDate3.datepicker(type=text, name="giveawayDate3")
+        
+        div.giveawayGroup
+          label Giveaway Time & Title
+          input#giveawayD3Title1.datepicker(type=text, name="giveawayD3T1")
+          
+          label Giveaway Desc.
+          input#giveawayD3Desc1(type=text, name="giveawayD3Desc1")
+          
+          label Giveaway Savings
+          input#giveawayD3Savings1(type=text, name="giveawayD3Savings1")
+          
+        div.addGiveaway3
+          button Add Giveaway +
+          
+    //Enter for a Chance to Win      
+    div.formGroup
+      h2 Enter for a Chance to Win
+      
+      div.one-third
+        div.winGroup
+          label GO Win Brand
+          input#winC1Brand1(type=text, name="winC1Brand1")
+          
+          label Win Desc.
+          input#winC1Desc1(type=text, name="winC1Dec1")
+          
+          label Win Savings
+          input#winC1Savings1(type=text, name="winC1Savings1")
+          
+        div.addWin1
+          button Add Win +
+         
+      div.one-third
+        div.winGroup
+          label GO Win Brand
+          input#winC2Brand1(type=text, name="winC2Brand1")
+          
+          label Win Desc.
+          input#winC2Desc1(type=text, name="winC2Dec1")
+          
+          label Win Savings
+          input#winC2Savings1(type=text, name="winC2Savings1")
+          
+        div.addWin2
+          button Add Win +
+          
+      div.one-third
+        div.winGroup
+          label GO Win Brand
+          input#winC3Brand1(type=text, name="winC3Brand1")
+          
+          label Win Desc.
+          input#winC3Desc1(type=text, name="winC3Dec1")
+          
+          label Win Savings
+          input#winC3Savings1(type=text, name="winC3Savings1")
+          
+        div.addWin3
+          button Add Win +
+      
+    //Social Image
+    div.formGroup
+      h2 Social Image
+      div
+        label Social Image URL
+        input#socialImg(type=text, name="socialImg")
+        
+    //Disclaimer    
+    div.formGroup
+      h2 Disclaimer
+      div
+        label Disclaimer
+        textarea#disclaimer(rows=5, name="disclaimer")
+      
+          
+      input(type="hidden", value="{{count}}")      
+    button(type="submit") Export
