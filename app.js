@@ -14,6 +14,8 @@ var fs = require('fs');
 var server = yaml.safeLoad(fs.readFileSync('./config.yml', 'utf8'));
 var env = process.env.NODE_ENV;
 
+var redis = require('./my_modules/redis');
+
 var app = express();
 
 // set environment

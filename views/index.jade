@@ -33,29 +33,32 @@ block content
       div.previewDate(ng-repeat="prevDate in prevDates", name="previewDates")
         label Grand Opening Preview Day & Time
         div.dateGroup
-          select.goPrevDate(name="goPrevDate")
+          select.goPrevDate(name="goPrevDate" ng-model="prv_day")
             option(ng-repeat="weekday in weekdays") {{weekday.day}}
 
-          select.goPrevTime_startHour(name="goPrevTime_startHour")
+          select.goPrevDate_startHour(name="goPrevDate_startHour" ng-model="prv_st_hr")
             option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
           span :
-          select.goPrevTime_startMinute(name="goPrevTime_startMinute")
+          select.goPrevDate_startMinute(name="goPrevDate_startMinute" ng-model="prv_st_min")
             option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
 
-          select.goPrevTime_startAmPm(name="goPrevTime_startAmPm")
+          select.goPrevDate_startAmPm(name="goPrevDate_startAmPm" ng-model="prv_st_ampm")
             option(value="AM") AM
             option(value="PM") PM
           span  -
           //End Time
-          select.goPrevTime_endHour(name="goPrevTime_endHour")
+          select.goPrevDate_endHour(name="goPrevDate_endHour" ng-model="prv_en_hr")
             option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
           span :
-          select.goPrevTime_endMinute(name="goPrevTime_endMinute")
+          select.goPrevDate_endMinute(name="goPrevDate_endMinute" ng-model="prv_en_min")
             option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
 
-          select.goPrevTime_endAmPm(name="goPrevTime_endAmPm")
+          select.goPrevDate_endAmPm(name="goPrevDate_endAmPm" ng-model="prv_en_ampm")
             option(value="AM") AM
             option(value="PM") PM    
+
+        input(type="hidden" name="goPrevDateStart" value="{{prv_day}} {{prv_st_hr}}:{{prv_st_min}} {{prv_st_ampm}}")
+        input(type="hidden" name="goPrevDateEnd" value="{{prv_day}} {{prv_en_hr}}:{{prv_en_min}} {{prv_en_ampm}}")
 
       div.addPreviewDate
         button(type="button",ng-click="duplicatePrevEvent()") Add Preview Date +
@@ -64,31 +67,35 @@ block content
       div.eventDate
         label Grand Opening Event Day & Time
         div.dateGroup
-          select#goEventDate1(name="goEventDate1")
+          select#goEventDate(name="goEventDate" ng-model="evt_day")
             option(ng-repeat="weekday in weekdays") {{weekday.day}}
 
-          select#goEventTime1_startHour(name="goEventTime1_startHour")
+          select#goEventDate_startHour(name="goEventDate_startHour" ng-model="evt_st_hr")
             option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
           span :
-          select#goEventTime1_startMinute(name="goEventTime1_startMinute")
+          select#goEventDate_startMinute(name="goEventDate_startMinute" ng-model="evt_st_min")
             option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
 
-          select#goEventTime1_startAmPm(name="goEventTime1_startAmPm")
+          select#goEventDate_startAmPm(name="goEventDate_startAmPm" ng-model="evt_st_ampm")
             option(value="AM") AM
             option(value="PM") PM
           
           span  - 
             
           //End Time  
-          select#goEventTime1_endHour(name="goEventTime1_endHour")
+          select#goEventDate_endHour(name="goEventDate_endHour" ng-model="evt_en_hr")
             option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
           span :
-          select#goEventTime1_endMinute(name="goEventTime1_endMinute")
+          select#goEventDate_endMinute(name="goEventDate_endMinute" ng-model="evt_en_min")
             option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
 
-          select#goEventTime1_endAmPm(name="goEventTime1_endAmPm")
+          select#goEventDate_endAmPm(name="goEventDate_endAmPm" ng-model="evt_en_ampm")
             option(value="AM") AM
             option(value="PM") PM
+            
+          input(type="hidden" name="goEvtDateStart" value="{{evt_day}} {{evt_st_hr}}:{{evt_st_min}} {{evt_st_ampm}}")
+          input(type="hidden" name="goEvtDateEnd" value="{{evt_day}} {{evt_en_hr}}:{{evt_en_min}} {{evt_en_ampm}}")
+
       
       div.addGoEventDate
         button(type="button") Add Grand Opening Event Date +
@@ -108,7 +115,7 @@ block content
         
       div.one-third
         label Appearance Date
-        input#appearanceDate1.datepicker(type=text, name="appearanceDate1")
+        input#appearanceDate.datepicker(type=text, name="appearanceDate")
         
       div.one-third
         label Appearance Name
@@ -121,26 +128,26 @@ block content
       div
         label Appearance Time 1
         div.dateGroup
-          select#appearTime1_startHour(name="appearTime1_startHour")
+          select#appearDate_startHour(name="appearDate_startHour")
             option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
           span :
-          select#appearTime1_startMinute(name="appearTime1_startMinute")
+          select#appearDate_startMinute(name="appearDate_startMinute")
             option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
 
-          select#appearTime1_startAmPm(name="appearTime1_startAmPm")
+          select#appearDate_startAmPm(name="appearDate_startAmPm")
             option(value="AM") AM
             option(value="PM") PM
           
           span  - 
             
           //End Time  
-          select#appearTime1_endHour(name="appearTime1_endHour")
+          select#appearDate_endHour(name="appearDate_endHour")
             option(ng-repeat="n in [] | hourRange:12", value=n) {{n}}
           span :
-          select#appearTime1_endMinute(name="appearTime1_endMinute")
+          select#appearDate_endMinute(name="appearDate_endMinute")
             option(ng-repeat="n in [] | minuteRange:59", value=n) {{n}}
 
-          select#appearTime1_endAmPm(name="appearTime1_endAmPm")
+          select#appearDate_endAmPm(name="appearDate_endAmPm")
             option(value="AM") AM
             option(value="PM") PM
 
@@ -160,7 +167,7 @@ block content
       div.one-third
         label 
           strong Giveaway Date 1
-        input#giveawayDate1.datepicker(type=text, name="giveawayDate1")
+        input#giveawayDate.datepicker(type=text, name="giveawayDate")
         
         div.giveawayGroup
           label Giveaway Time & Title
